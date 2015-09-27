@@ -111,12 +111,12 @@ describe('player', function () {
     describe('bet_request', function () {
         it('default bet_k_k', function () {
             var bet = player.bet_request(game_state_simple_k_k);
-            assert.equal(bet, 1000);
+            assert.equal(bet, 980);
             assert(player.exception == false);
         });
         it('default bet_q_4', function () {
             var bet = player.bet_request(game_state_simple_q_4);
-            assert(bet > 0);
+            assert(bet == 0);
             assert(player.exception == false);
         });
 

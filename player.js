@@ -61,12 +61,18 @@ function river_request(game_state) {
 module.exports = {
 
   exception: false,
+  show_log:true,
   VERSION: "Stage preflop, 2 strategy",
+
+  log: function () {
+      if (this.show_log) {
+          console.log(arguments);
+      }
+  },
 
   bet_request: function(game_state) {
     try {
-      console.log('game_state_json', JSON.stringify(game_state));
-      console.log("game_state !!!", game_state);
+      this.log('game_state_json', JSON.stringify(game_state));
 
       var player = game_state.players[game_state.in_action];
       if ( player.hole_cards.length != 2 ) {
@@ -89,6 +95,7 @@ module.exports = {
       return bet;
     } catch (e) {
       this.exception = true;
+      console.log(e);
       console.log('EXCEPTION!' + e.name + ":" + e.message + "\n" + e.stack);
       return 1000;
     }

@@ -8,6 +8,16 @@ module.exports = {
     return 1000;
   },
 
+  // rank2Num: function(rank) {
+  //   switch (rank) {
+  //     case 'J': return 11;
+  //     case 'Q': return 12;
+  //     case 'K': return 13;
+  //     case 'A': return 14;
+  //     default: return rank;
+  //   }
+  // },
+
   /**
    * @returns false - если не префлоп
    *      1000 - если пара или больше или равно 10
@@ -61,6 +71,7 @@ module.exports = {
 
     return true;
   },
+<<<<<<< HEAD
 
   any_cards_are_equal: function(cards) {
     for (var i = 0; i < cards.length-1; i++) {
@@ -71,6 +82,8 @@ module.exports = {
     }
     return false;
   },
+=======
+>>>>>>> origin/master
 
   get_player_cards: function(game_state) {
     var index = game_state.in_action;

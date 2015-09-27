@@ -32,7 +32,7 @@ function preflop_stage(game_state) {
 
     if (game_state.current_buy_in > parseInt(game_state.small_blind) * 2) {
       if (game_state.current_buy_in >= parseInt(game_state.small_blind) * 6) {
-        if (rank1 > 11 && rank2 > 11) {
+        if ((rank1 > 11 && rank2 > 11) || (rank1 == rank2 && rank1 >= 10)) {
           bet = player.stack;
         }
       } else {

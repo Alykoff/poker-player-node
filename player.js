@@ -69,7 +69,7 @@ module.exports = {
 
   should_bet_after_flop: function(cards) {
     return true;
-  }
+  },
 
   get_player_cards: function(game_state) {
     var index = game_state.in_action;

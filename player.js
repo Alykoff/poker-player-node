@@ -118,9 +118,9 @@ function turn_request(game_state) {
       allCards.push(card);
   }
   
-  console.log('Stack in flop: ' + stack);
+  console.log('Stack in turn: ' + stack);
 
-  return stack;
+  return flop_request(game_state);
 }
 
 function river_request(game_state) {
@@ -138,10 +138,8 @@ function river_request(game_state) {
   for (var card in communityCards) {
       allCards.push(card);
   }
-  
-  console.log('Stack in flop: ' + stack);
 
-  return stack;
+  return flop_request(game_state);
 }
 
 

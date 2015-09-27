@@ -42,6 +42,12 @@ function preflop_stage(game_state) {
       }
     } else if ((rank1 + rank2 >= 17)) {
       bet = parseInt(game_state.small_blind) * 6;
+    } else if(rank1 == rank2) {
+      if ( rank1 >= 10 ) {
+          bet = game_state.current_buy_in - player.bet + game_state.minimum_raise;
+      } else {
+          bet = game_state.current_buy_in - player.bet;
+      }
     }
 
     return bet;

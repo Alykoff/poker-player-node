@@ -56,16 +56,56 @@ function flop_request(game_state) {
       rank2 = rank2Num(card2.rank),
       numOfPlayers = game_state.players.length,
       communityCards = game_state.community_cards;
-  var allCards = [];
-  allCards.push(card1);
-  allCards.push(card2);
-  for (var card in communityCards) {
-      allCards.push(card);
-  }
   
+  var allCards = [], i;
+  var isPair=0, isTwoPair = 0, isThree = 0, isFour = 0, isFlash = 0;
+  var arPairs = {
+    1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0 
+  };
+
+  allCards.push(card1);
+  arPairs[rank1] += 1;
+  arPairs[rank2] += 1;
+  
+  allCards.push(card2);
+
   console.log('Stack in flop: ' + stack);
 
-  return stack;
+  for (var card in communityCards) {
+    allCards.push(card);
+    arPairs[card.rank] += 1;
+  }
+  
+  
+  for (i in allCards) {
+    arPairs[rank2(allCards[i].rank)] += 1;
+  }
+  
+  for (i in arPairs) {
+    if(arPairs[i] == 4) {
+      isFour = 1;
+    } else if(arPairs[i] == 3) {
+      isThree = 1;
+    } else if(arPairs[i] == 2) {
+      if( isPair >  0) {
+        isTwoPair = 1;
+      } else {
+        isPair = 1;
+      }
+    }
+  }
+  
+  
+  if (isFour || isThree ) {
+    return stack;
+  }
+  
+  if ( isTwoPair || isPair ) {
+    min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
+    return min_raise;
+  }
+
+  return 0;
 }
 
 function turn_request(game_state) {

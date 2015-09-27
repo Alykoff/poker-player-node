@@ -24,15 +24,13 @@ function preflop_stage(game_state) {
       return false;
     }
 
-    var card1 = player.hole_cards[0]
+    var card1 = player.hole_cards[0];
     var card2 = player.hole_cards[1];
     var rank1 = rank2Num(card1.rank);
     var rank2 = rank2Num(card2.rank);
     var bet = 0, min_raise = 0;
 
-    if (
-      rank1 == rank2 && rank1 > 10
-    ) {
+    if (rank1 == rank2 && rank1 > 10) {
       return player.stack;
     }
 

@@ -55,5 +55,16 @@ module.exports = {
   
   showdown: function(game_state) {
 
+  },
+
+  get_player_cards: function(game_state) {
+    var index = game_state.in_action;
+
+    if (game_state.players[index]) {
+      return game_state.players[index].hole_cards;
+    }
+
+    console.log("player not found", game_state);
   }
+
 };

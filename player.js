@@ -54,7 +54,7 @@ module.exports = {
   
   river_request: function(game_state) {
     return 1000;
-  }
+  },
   
   
   bet_request: function(game_state) {
@@ -72,9 +72,9 @@ module.exports = {
       bet = preflop_stage(game_state);
     } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
       bet = flop_request(game_state);
-    } else ( game_state.community_cards && game_state.community_cards.length == 4 ) {
+    } else if ( game_state.community_cards && game_state.community_cards.length == 4 ) {
       bet = turn_request(game_state);
-    } else ( game_state.community_cards && game_state.community_cards.length == 5 ) {
+    } else if ( game_state.community_cards && game_state.community_cards.length == 5 ) {
       bet = river_request(game_state);
     } else {
       return 0;

@@ -38,12 +38,10 @@ function preflop_stage(game_state) {
 
     min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
 
-    if (
-        game_state.current_buy_in > parseInt(game_state.small_blind)*2
-        && rank1 > 11
-        && rank2 > 11
-    ) {
-      bet = player.stack;
+    if (game_state.current_buy_in > parseInt(game_state.small_blind) * 2) {
+      if (rank1 > 11 && rank2 > 11) {
+        bet = player.stack;
+      }
     } else if ( rank1 > 10 && rank2 > 10) {
       bet = player.stack;
     }

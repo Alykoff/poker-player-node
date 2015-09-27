@@ -1,55 +1,54 @@
-  /**
-   * @returns false - если не префлоп
-   *      1000 - если пара или больше или равно 10
-   *      0 - если нужно сбросить карты
-   */
-  function preflop_stage(game_state) {
-    var player = game_state.players[game_state.in_action];
+/**
+ * @returns false - если не префлоп
+ *      1000 - если пара или больше или равно 10
+ *      0 - если нужно сбросить карты
+ */
+function preflop_stage(game_state) {
+  var player = game_state.players[game_state.in_action];
 
-    if ( player.hole_cards.length != 2 ) {
-      return false;
-    }
-    
-    var card1 = player.hole_cards[0], card2 = player.hole_cards[1];
-    
-    if (
-      card1.rank == card2.rank
-    ) {
-      return 1000;
-    }
-    
-    if (
-      (
-        card1.rank == '10'
-        || card1.rank == 'J'
-        || card1.rank == 'Q'
-        || card1.rank == 'K'
-        || card1.rank == 'A'
-      ) && (
-        card2.rank == '10'
-        || card2.rank == 'J'
-        || card2.rank == 'Q'
-        || card2.rank == 'K'
-        || card2.rank == 'A'
-      )
-    ) {
-      return 1000;
-    }
-    
-    return 10;
+  if ( player.hole_cards.length != 2 ) {
+    return false;
   }
-
-  function flop_request(game_state) {
+  
+  var card1 = player.hole_cards[0], card2 = player.hole_cards[1];
+  
+  if (
+    card1.rank == card2.rank
+  ) {
     return 1000;
   }
   
-  function turn_request(game_state) {
+  var numCard1 = rank2Num(card1);
+  var numCard2 = rank2Num(card2);
+  if (numCard1 >= 10 && numCard2 >= 10) {
     return 1000;
   }
   
-  function river_request(game_state) {
-    return 1000;
+  return 10;
+}
+
+function flop_request(game_state) {
+  return 1000;
+}
+
+function turn_request(game_state) {
+  return 1000;
+}
+
+function river_request(game_state) {
+  return 1000;
+}
+
+
+function rank2Num(rank) {
+  switch (rank) {
+    case 'J': return 11;
+    case 'Q': return 12;
+    case 'K': return 13;
+    case 'A': return 14;
+    default: return parseInt(rank);
   }
+}
 
 
 module.exports = {
@@ -81,17 +80,6 @@ module.exports = {
     
     return bet;
   },
-
-  rank2Num: function(rank) {
-    switch (rank) {
-      case 'J': return 11;
-      case 'Q': return 12;
-      case 'K': return 13;
-      case 'A': return 14;
-      default: return rank;
-    }
-  },
-
   
   showdown: function(game_state) {
 

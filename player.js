@@ -71,7 +71,6 @@ module.exports = {
 
     return true;
   },
-<<<<<<< HEAD
 
   any_cards_are_equal: function(cards) {
     for (var i = 0; i < cards.length-1; i++) {
@@ -82,8 +81,6 @@ module.exports = {
     }
     return false;
   },
-=======
->>>>>>> origin/master
 
   get_player_cards: function(game_state) {
     var index = game_state.in_action;

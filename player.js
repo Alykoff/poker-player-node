@@ -10,11 +10,7 @@ module.exports = {
    */
   preflop_stage: function(game_state) {
     var player = game_state.players[game_state.in_action];
-    
-    if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
-      return false;
-    }
-    
+
     if ( player.hole_cards.length != 2 ) {
       return false;
     }
@@ -48,15 +44,43 @@ module.exports = {
     return 10;
   },
 
+  flop_request: function(game_state) {
+    return 1000;
+  },
+  
+  turn_request: function(game_state) {
+    return 1000;
+  },
+  
+  river_request: function(game_state) {
+    return 1000;
+  }
+  
   
   bet_request: function(game_state) {
     console.log('game_state_json', JSON.stringify(game_state));
     console.log("game_state !!!", game_state);
-    var preflop = preflop_stage(game_state);
-    if (preflop === false) {
-      return 1000;
+
+    var player = game_state.players[game_state.in_action];
+    if ( player.hole_cards.length != 2 ) {
+      return false;
     }
-    return preflop;
+    var bet=0;
+
+    
+    if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
+      bet = preflop_stage(game_state);
+    } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
+      bet = flop_request(game_state);
+    } else ( game_state.community_cards && game_state.community_cards.length == 4 ) {
+      bet = turn_request(game_state);
+    } else ( game_state.community_cards && game_state.community_cards.length == 5 ) {
+      bet = river_request(game_state);
+    } else {
+      return 0;
+    }
+    
+    return bet;
   },
 
   // rank2Num: function(rank) {

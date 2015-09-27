@@ -1,4 +1,6 @@
 
+var OUR_NAME = 'node';
+
 function rank2Num(rank) {
   switch (rank) {
     case 'J': return 11;
@@ -22,9 +24,11 @@ function preflop_stage(game_state) {
       return false;
     }
 
-    var card1 = player.hole_cards[0], card2 = player.hole_cards[1];
-    rank1 = rank2Num(card1.rank);
-    rank2 = rank2Num(card2.rank);
+    var card1 = player.hole_cards[0]
+    var card2 = player.hole_cards[1];
+    var rank1 = rank2Num(card1.rank);
+    var rank2 = rank2Num(card2.rank);
+    var bet = 0, min_raise = 0;
     
     if (
       rank1 == rank2 && rank1 > 10
@@ -32,9 +36,8 @@ function preflop_stage(game_state) {
       return player.stack;
     }
 
-    var bet = 0;
-
     min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
+
     if (
         game_state.current_buy_in > parseInt(game_state.small_blind)*2
         && rank1 > 11
@@ -49,7 +52,12 @@ function preflop_stage(game_state) {
 }
 
 function flop_request(game_state) {
-  return 1000;
+  var player = game_state.players[game_state.in_action],
+      stack = player.stack;
+
+  console.log('Stack in flop: ' + stack);
+
+  return stack;
 }
 
 function turn_request(game_state) {
@@ -83,19 +91,22 @@ module.exports = {
       if ( player.hole_cards.length != 2 ) {
         return false;
       }
-      var bet=0;
+      var bet = 0;
 
+      if ( game_state.community_cards ) {
+        var tableState = game_state.community_cards.length;
 
-      if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
-        bet = preflop_stage(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
-        bet = flop_request(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 4 ) {
-        bet = turn_request(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 5 ) {
-        bet = river_request(game_state);
-      } else {
-        return 0;
+        if ( tableState == 0 ) {
+          bet = preflop_stage(game_state);
+        } else if ( tableState == 3 ) {
+          bet = flop_request(game_state);
+        } else if ( tableState == 4 ) {
+          bet = turn_request(game_state);
+        } else if ( tableState == 5 ) {
+          bet = river_request(game_state);
+        } else {
+          return 0;
+        }
       }
       return bet;
     } catch (e) {

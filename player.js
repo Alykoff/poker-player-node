@@ -83,15 +83,15 @@ module.exports = {
     return bet;
   },
 
-  // rank2Num: function(rank) {
-  //   switch (rank) {
-  //     case 'J': return 11;
-  //     case 'Q': return 12;
-  //     case 'K': return 13;
-  //     case 'A': return 14;
-  //     default: return rank;
-  //   }
-  // },
+  rank2Num: function(rank) {
+    switch (rank) {
+      case 'J': return 11;
+      case 'Q': return 12;
+      case 'K': return 13;
+      case 'A': return 14;
+      default: return rank;
+    }
+  },
 
   
   showdown: function(game_state) {

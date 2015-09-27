@@ -29,7 +29,7 @@ function preflop_stage(game_state) {
     var rank1 = rank2Num(card1.rank);
     var rank2 = rank2Num(card2.rank);
     var bet = 0, min_raise = 0;
-    
+
     if (
       rank1 == rank2 && rank1 > 10
     ) {
@@ -44,6 +44,8 @@ function preflop_stage(game_state) {
       }
     } else if ( rank1 > 10 && rank2 > 10) {
       bet = player.stack;
+    } else if ( rank1 + rank2 >= 17 ) {
+      bet = parseInt(game_state.small_blind) * 6;
     }
 
     return bet;
@@ -51,7 +53,13 @@ function preflop_stage(game_state) {
 
 function flop_request(game_state) {
   var player = game_state.players[game_state.in_action],
-      stack = player.stack;
+      stack = player.stack,
+      card1 = player.hole_cards[0],
+      card2 = player.hole_cards[1],
+      rank1 = rank2Num(card1.rank),
+      rank2 = rank2Num(card2.rank),
+      numOfPlayers = game_state.players.length;
+
 
   console.log('Stack in flop: ' + stack);
 

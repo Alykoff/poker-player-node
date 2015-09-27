@@ -58,8 +58,19 @@ module.exports = {
   },
 
   should_bet_after_flop: function(cards) {
+
     return true;
-  }
+  },
+
+  any_cards_are_equal: function(cards) {
+    for (var i = 0; i < cards.length-1; i++) {
+      for (var j = i+1; j < cards.length; j++) {
+        if (cards[i].rank == cards[j].rank)
+          return true;
+      }
+    }
+    return false;
+  },
 
   get_player_cards: function(game_state) {
     var index = game_state.in_action;

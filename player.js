@@ -40,7 +40,7 @@ function preflop_stage(game_state) {
       if (rank1 > 11 && rank2 > 11) {
         bet = player.stack;
       }
-    } else if ( rank1 + rank2 >= 20 ) {
+    } else if ( rank1 + rank2 >= 17 ) {
       bet = parseInt(game_state.small_blind) * 6;
     }
 

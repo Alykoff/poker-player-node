@@ -51,8 +51,20 @@ function preflop_stage(game_state) {
 
 function flop_request(game_state) {
   var player = game_state.players[game_state.in_action],
-      stack = player.stack;
-
+      stack = player.stack,
+      card1 = player.hole_cards[0],
+      card2 = player.hole_cards[1],
+      rank1 = rank2Num(card1.rank),
+      rank2 = rank2Num(card2.rank),
+      numOfPlayers = game_state.players.length,
+      communityCards = game_state.community_cards;
+  var allCards = [];
+  allCards.push(card1);
+  allCards.push(card2);
+  for (var card in communityCards) {
+      allCards.push(card);
+  }
+  
   console.log('Stack in flop: ' + stack);
 
   return stack;

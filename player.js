@@ -72,19 +72,22 @@ module.exports = {
       if ( player.hole_cards.length != 2 ) {
         return false;
       }
-      var bet=0;
+      var bet = 0;
 
+      if ( game_state.community_cards ) {
+        var tableState = game_state.community_cards.length;
 
-      if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
-        bet = preflop_stage(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
-        bet = flop_request(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 4 ) {
-        bet = turn_request(game_state);
-      } else if ( game_state.community_cards && game_state.community_cards.length == 5 ) {
-        bet = river_request(game_state);
-      } else {
-        return 0;
+        if ( tableState == 0 ) {
+          bet = preflop_stage(game_state);
+        } else if ( tableState == 3 ) {
+          bet = flop_request(game_state);
+        } else if ( tableState == 4 ) {
+          bet = turn_request(game_state);
+        } else if ( tableState == 5 ) {
+          bet = river_request(game_state);
+        } else {
+          return 0;
+        }
       }
       return bet;
     } catch (e) {

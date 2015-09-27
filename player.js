@@ -36,7 +36,9 @@ function preflop_stage(game_state) {
           bet = player.stack;
         }
       } else {
+        if ((player.stack / game_state.small_blind > 50) || ((rank1 + rank2 >= 17) || (rank1 == rank2 && rank1 >=10 ))){
           bet = game_state.current_buy_in - player.bet;
+        }
       }
     } else if ((rank1 + rank2 >= 17)) {
       bet = parseInt(game_state.small_blind) * 6;

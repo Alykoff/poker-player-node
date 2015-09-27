@@ -120,9 +120,13 @@ function turn_request(game_state) {
   
   console.log('Stack in turn: ' + stack);
 
-  allRankCards = allCards.map(function(el) {
-    return rank2Num(el.rank);
-  });
+  // var allRankCards = allCards.map(function(el) {
+  //   return rank2Num(el.rank);
+  // }).sort(function(a, b) {
+  //   return a - b;
+  // });
+
+  // var isSt
 
   return flop_request(game_state);
 }

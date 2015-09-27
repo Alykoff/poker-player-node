@@ -125,5 +125,6 @@ describe('player', function () {
             var bet = player.bet_request(game_state_simple_k_k);
             assert(player.exception == false);
         });
+        
     });
 });

@@ -89,7 +89,6 @@ function flop_request(game_state) {
     }
   }
   
-  
   if (isFour || isThree ) {
     return stack;
   }

@@ -32,12 +32,13 @@ function preflop_stage(game_state) {
 
     var bet = 0;
 
+    min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
     if ( rank2Num(card1.rank) >= 10 ) {
-      bet += 500;
+      bet += min_raise > 500 ? min_raise : 500;
     }
 
     if ( rank2Num(card2.rank) >= 10 ) {
-      bet += 500;
+      bet += min_raise > 500 ? min_raise : 500;
     }
 
     return bet;

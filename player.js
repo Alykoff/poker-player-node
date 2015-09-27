@@ -51,7 +51,7 @@ module.exports = {
   
   bet_request: function(game_state) {
     console.log("game_state !!!", game_state);
-    var preflop = preflop_stage(game_state);
+    var preflop = this.preflop_stage(game_state);
     if (preflop === false) {
       return 1000;
     }

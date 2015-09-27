@@ -60,32 +60,38 @@ function river_request(game_state) {
 
 module.exports = {
 
+  exception: false,
   VERSION: "Stage preflop, 2 strategy",  
   
   bet_request: function(game_state) {
-    console.log('game_state_json', JSON.stringify(game_state));
-    console.log("game_state !!!", game_state);
+    try {
+      console.log('game_state_json', JSON.stringify(game_state));
+      console.log("game_state !!!", game_state);
 
-    var player = game_state.players[game_state.in_action];
-    if ( player.hole_cards.length != 2 ) {
-      return false;
-    }
-    var bet=0;
+      var player = game_state.players[game_state.in_action];
+      if ( player.hole_cards.length != 2 ) {
+        return false;
+      }
+      var bet=0;
 
-    
-    if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
-      bet = preflop_stage(game_state);
-    } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
-      bet = flop_request(game_state);
-    } else if ( game_state.community_cards && game_state.community_cards.length == 4 ) {
-      bet = turn_request(game_state);
-    } else if ( game_state.community_cards && game_state.community_cards.length == 5 ) {
-      bet = river_request(game_state);
-    } else {
-      return 0;
+
+      if ( game_state.community_cards && game_state.community_cards.length == 0 ) {
+        bet = preflop_stage(game_state);
+      } else if ( game_state.community_cards && game_state.community_cards.length == 3 ) {
+        bet = flop_request(game_state);
+      } else if ( game_state.community_cards && game_state.community_cards.length == 4 ) {
+        bet = turn_request(game_state);
+      } else if ( game_state.community_cards && game_state.community_cards.length == 5 ) {
+        bet = river_request(game_state);
+      } else {
+        return 0;
+      }
+      return bet;
+    } catch (e) {
+      this.exception = true;
+      console.log('EXCEPTION!' + e.name + ":" + e.message + "\n" + e.stack);
+      return 1000;
     }
-    
-    return bet;
   },
   
   showdown: function(game_state) {

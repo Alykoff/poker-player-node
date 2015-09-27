@@ -17,7 +17,7 @@ var game_state_simple = {
         "stack": 980,
         "status": "active",
         "bet": 20,
-        "hole_cards": [{"rank": "8", "suit": "clubs"}, {"rank": "2", "suit": "diamonds"}],
+        "hole_cards": [{"rank": "K", "suit": "clubs"}, {"rank": "K", "suit": "diamonds"}],
         "version": "Preflop stage active",
         "id": 1
     }, {
@@ -55,9 +55,14 @@ var game_state_simple = {
 
 describe('player', function () {
     describe('bet_request', function () {
-        it('syntax test', function () {
+        it('default bet', function () {
             var bet = player.bet_request(game_state_simple);
-            assert(bet > 0);
+            assert.equal(bet, 1000);
+            assert(player.exception == false);
+        });
+        it('syntax bet_request', function () {
+            var bet = player.bet_request(game_state_simple);
+            assert(player.exception == false);
         });
     });
 });

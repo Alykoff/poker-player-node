@@ -1,3 +1,13 @@
+
+function rank2Num(rank) {
+  switch (rank) {
+    case 'J': return 11;
+    case 'Q': return 12;
+    case 'K': return 13;
+    case 'A': return 14;
+    default: return parseInt(rank);
+  }
+}
 /**
  * @returns false - если не префлоп
  *      1000 - если пара или больше или равно 10
@@ -40,15 +50,6 @@ function river_request(game_state) {
 }
 
 
-function rank2Num(rank) {
-  switch (rank) {
-    case 'J': return 11;
-    case 'Q': return 12;
-    case 'K': return 13;
-    case 'A': return 14;
-    default: return parseInt(rank);
-  }
-}
 
 
 module.exports = {

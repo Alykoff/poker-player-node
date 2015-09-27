@@ -15,29 +15,30 @@ function rank2Num(rank) {
  *      0 - если нужно сбросить карты
  */
 function preflop_stage(game_state) {
-  
+
     var player = game_state.players[game_state.in_action];
 
     if ( player.hole_cards.length != 2 ) {
       return false;
     }
-    
+
     var card1 = player.hole_cards[0], card2 = player.hole_cards[1];
-    
+
     if (
       card1.rank == card2.rank
     ) {
       return 1000;
     }
-    
+
     var bet = 0;
-    
+
+    min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
     if ( rank2Num(card1.rank) >= 10 ) {
-      bet += 500;
+      bet += min_raise > 500 ? min_raise : 500;
     }
 
     if ( rank2Num(card2.rank) >= 10 ) {
-      bet += 500;
+      bet += min_raise > 500 ? min_raise : 500;
     }
 
     return bet;
@@ -61,12 +62,18 @@ function river_request(game_state) {
 module.exports = {
 
   exception: false,
-  VERSION: "Stage preflop, 2 strategy",  
-  
+  show_log:true,
+  VERSION: "Stage preflop, 2 strategy",
+
+  log: function () {
+      if (this.show_log) {
+          console.log(arguments);
+      }
+  },
+
   bet_request: function(game_state) {
     try {
-      console.log('game_state_json', JSON.stringify(game_state));
-      console.log("game_state !!!", game_state);
+      this.log('game_state_json', JSON.stringify(game_state));
 
       var player = game_state.players[game_state.in_action];
       if ( player.hole_cards.length != 2 ) {
@@ -92,38 +99,14 @@ module.exports = {
       return bet;
     } catch (e) {
       this.exception = true;
+      console.log(e);
       console.log('EXCEPTION!' + e.name + ":" + e.message + "\n" + e.stack);
       return 1000;
     }
   },
-  
+
   showdown: function(game_state) {
 
   },
-
-  should_bet_after_flop: function(cards) {
-
-    return true;
-  },
-
-  any_cards_are_equal: function(cards) {
-    for (var i = 0; i < cards.length-1; i++) {
-      for (var j = i+1; j < cards.length; j++) {
-        if (cards[i].rank == cards[j].rank)
-          return true;
-      }
-    }
-    return false;
-  },
-
-  get_player_cards: function(game_state) {
-    var index = game_state.in_action;
-
-    if (game_state.players[index]) {
-      return game_state.players[index].hole_cards;
-    }
-
-    console.log("player not found", game_state);
-  }
 
 };

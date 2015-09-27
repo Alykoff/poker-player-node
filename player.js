@@ -71,11 +71,45 @@ function flop_request(game_state) {
 }
 
 function turn_request(game_state) {
-  return 1000;
+  var player = game_state.players[game_state.in_action],
+      stack = player.stack,
+      card1 = player.hole_cards[0],
+      card2 = player.hole_cards[1],
+      rank1 = rank2Num(card1.rank),
+      rank2 = rank2Num(card2.rank),
+      numOfPlayers = game_state.players.length,
+      communityCards = game_state.community_cards;
+  var allCards = [];
+  allCards.push(card1);
+  allCards.push(card2);
+  for (var card in communityCards) {
+      allCards.push(card);
+  }
+  
+  console.log('Stack in flop: ' + stack);
+
+  return stack;
 }
 
 function river_request(game_state) {
-  return 1000;
+  var player = game_state.players[game_state.in_action],
+      stack = player.stack,
+      card1 = player.hole_cards[0],
+      card2 = player.hole_cards[1],
+      rank1 = rank2Num(card1.rank),
+      rank2 = rank2Num(card2.rank),
+      numOfPlayers = game_state.players.length,
+      communityCards = game_state.community_cards;
+  var allCards = [];
+  allCards.push(card1);
+  allCards.push(card2);
+  for (var card in communityCards) {
+      allCards.push(card);
+  }
+  
+  console.log('Stack in flop: ' + stack);
+
+  return stack;
 }
 
 

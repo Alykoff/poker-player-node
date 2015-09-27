@@ -15,6 +15,9 @@ function rank2Num(rank) {
  *      0 - если нужно сбросить карты
  */
 function preflop_stage(game_state) {
+  
+    var player = game_state.players[game_state.in_action];
+
     if ( player.hole_cards.length != 2 ) {
       return false;
     }

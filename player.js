@@ -1,11 +1,15 @@
 
 module.exports = {
 
-  VERSION: "Preflop stage",
+  VERSION: "Preflop stage active",
   
   bet_request: function(game_state) {
     console.log("game_state !!!", game_state);
-    return 1000;
+    var preflop = preflop_stage(game_state);
+    if (preflop === false) {
+      return 1000;
+    }
+    return preflop;
   },
 
   // rank2Num: function(rank) {

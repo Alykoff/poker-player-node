@@ -18,25 +18,29 @@
       return 1000;
     }
     
-    if (
-      (
-        card1.rank == '10'
-        || card1.rank == 'J'
-        || card1.rank == 'Q'
-        || card1.rank == 'K'
-        || card1.rank == 'A'
-      ) && (
-        card2.rank == '10'
-        || card2.rank == 'J'
-        || card2.rank == 'Q'
-        || card2.rank == 'K'
-        || card2.rank == 'A'
-      )
-    ) {
-      return 1000;
-    }
+    var bet = 0;
     
-    return 10;
+    if (
+      card1.rank == '10'
+      || card1.rank == 'J'
+      || card1.rank == 'Q'
+      || card1.rank == 'K'
+      || card1.rank == 'A'
+    ) {
+      bet += 500;
+    }
+
+    if (
+      card2.rank == '10'
+      || card2.rank == 'J'
+      || card2.rank == 'Q'
+      || card2.rank == 'K'
+      || card2.rank == 'A'
+    ) {
+      bet += 500;
+    }
+
+    return bet;
   }
 
   function flop_request(game_state) {
@@ -54,7 +58,7 @@
 
 module.exports = {
 
-  VERSION: "Preflop stage active",  
+  VERSION: "Stage preflop, 2 strategy",  
   
   bet_request: function(game_state) {
     console.log('game_state_json', JSON.stringify(game_state));

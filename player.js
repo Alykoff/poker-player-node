@@ -50,6 +50,7 @@ module.exports = {
 
   
   bet_request: function(game_state) {
+    console.log('game_state_json', JSON.stringify(game_state));
     console.log("game_state !!!", game_state);
     var preflop = preflop_stage(game_state);
     if (preflop === false) {

@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player",
+  VERSION: "Preflop stage",
   
   bet_request: function(game_state) {
     console.log("game_state !!!", game_state);

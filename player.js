@@ -1,11 +1,20 @@
-  /**
-   * @returns false - если не префлоп
-   *      1000 - если пара или больше или равно 10
-   *      0 - если нужно сбросить карты
-   */
-  function preflop_stage(game_state) {
-    var player = game_state.players[game_state.in_action];
 
+function rank2Num(rank) {
+  switch (rank) {
+    case 'J': return 11;
+    case 'Q': return 12;
+    case 'K': return 13;
+    case 'A': return 14;
+    default: return parseInt(rank);
+  }
+}
+
+/**
+ * @returns false - если не префлоп
+ *      1000 - если пара или больше или равно 10
+ *      0 - если нужно сбросить карты
+ */
+function preflop_stage(game_state) {
     if ( player.hole_cards.length != 2 ) {
       return false;
     }
@@ -20,40 +29,30 @@
     
     var bet = 0;
     
-    if (
-      card1.rank == '10'
-      || card1.rank == 'J'
-      || card1.rank == 'Q'
-      || card1.rank == 'K'
-      || card1.rank == 'A'
-    ) {
+    if ( rank2Num(card1.rank) >= 10 ) {
       bet += 500;
     }
 
-    if (
-      card2.rank == '10'
-      || card2.rank == 'J'
-      || card2.rank == 'Q'
-      || card2.rank == 'K'
-      || card2.rank == 'A'
-    ) {
+    if ( rank2Num(card2.rank) >= 10 ) {
       bet += 500;
     }
 
     return bet;
-  }
+}
 
-  function flop_request(game_state) {
-    return 1000;
-  }
-  
-  function turn_request(game_state) {
-    return 1000;
-  }
-  
-  function river_request(game_state) {
-    return 1000;
-  }
+function flop_request(game_state) {
+  return 1000;
+}
+
+function turn_request(game_state) {
+  return 1000;
+}
+
+function river_request(game_state) {
+  return 1000;
+}
+
+
 
 
 module.exports = {
@@ -85,17 +84,6 @@ module.exports = {
     
     return bet;
   },
-
-  rank2Num: function(rank) {
-    switch (rank) {
-      case 'J': return 11;
-      case 'Q': return 12;
-      case 'K': return 13;
-      case 'A': return 14;
-      default: return rank;
-    }
-  },
-
   
   showdown: function(game_state) {
 

@@ -2,25 +2,6 @@
 module.exports = {
 
   VERSION: "Preflop stage active",
-  
-  bet_request: function(game_state) {
-    console.log("game_state !!!", game_state);
-    var preflop = preflop_stage(game_state);
-    if (preflop === false) {
-      return 1000;
-    }
-    return preflop;
-  },
-
-  // rank2Num: function(rank) {
-  //   switch (rank) {
-  //     case 'J': return 11;
-  //     case 'Q': return 12;
-  //     case 'K': return 13;
-  //     case 'A': return 14;
-  //     default: return rank;
-  //   }
-  // },
 
   /**
    * @returns false - если не префлоп
@@ -66,6 +47,27 @@ module.exports = {
     
     return 10;
   },
+
+  
+  bet_request: function(game_state) {
+    console.log("game_state !!!", game_state);
+    var preflop = preflop_stage(game_state);
+    if (preflop === false) {
+      return 1000;
+    }
+    return preflop;
+  },
+
+  // rank2Num: function(rank) {
+  //   switch (rank) {
+  //     case 'J': return 11;
+  //     case 'Q': return 12;
+  //     case 'K': return 13;
+  //     case 'A': return 14;
+  //     default: return rank;
+  //   }
+  // },
+
   
   showdown: function(game_state) {
 

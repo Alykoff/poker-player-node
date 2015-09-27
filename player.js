@@ -1,4 +1,6 @@
 
+var OUR_NAME = 'node';
+
 function rank2Num(rank) {
   switch (rank) {
     case 'J': return 11;
@@ -45,7 +47,12 @@ function preflop_stage(game_state) {
 }
 
 function flop_request(game_state) {
-  return 1000;
+  var player = game_state.players[game_state.in_action],
+      stack = player.stack;
+
+  console.log('Stack in flop: ' + stack);
+
+  return stack;
 }
 
 function turn_request(game_state) {

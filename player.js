@@ -96,7 +96,11 @@ function flop_request(game_state) {
   }
   
   if ( isTwoPair || isPair ) {
-    min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
+    if( isTwoPair || rank1 >= 10 || rank2 >= 10) {
+      min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
+    } else {
+      min_raise = game_state.current_buy_in - player.bet;
+    }
     return min_raise;
   }
 

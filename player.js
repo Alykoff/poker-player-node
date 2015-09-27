@@ -36,16 +36,16 @@ function preflop_stage(game_state) {
           bet = player.stack;
         }
       } else {
+<<<<<<< HEAD
+        if (rank1 + rank2 >= 17) {
+=======
+        if ((player.stack / game_state.small_blind > 50) || ((rank1 + rank2 >= 17) || (rank1 == rank2 && rank1 >=10 ))){
+>>>>>>> a3dc225d036d47bc8106bf18a25299c2efe561f6
           bet = game_state.current_buy_in - player.bet;
+        }
       }
     } else if ((rank1 + rank2 >= 17)) {
       bet = parseInt(game_state.small_blind) * 6;
-    } else if(rank1 == rank2) {
-      if ( rank1 >= 10 ) {
-          bet = game_state.current_buy_in - player.bet + game_state.minimum_raise;
-      } else {
-          bet = game_state.current_buy_in - player.bet;
-      }
     }
 
     return bet;
@@ -120,9 +120,17 @@ function turn_request(game_state) {
       allCards.push(card);
   }
   
-  console.log('Stack in flop: ' + stack);
+  console.log('Stack in turn: ' + stack);
 
-  return stack;
+  // var allRankCards = allCards.map(function(el) {
+  //   return rank2Num(el.rank);
+  // }).sort(function(a, b) {
+  //   return a - b;
+  // });
+
+  // var isSt
+
+  return flop_request(game_state);
 }
 
 function river_request(game_state) {
@@ -140,10 +148,8 @@ function river_request(game_state) {
   for (var card in communityCards) {
       allCards.push(card);
   }
-  
-  console.log('Stack in flop: ' + stack);
 
-  return stack;
+  return flop_request(game_state);
 }
 
 

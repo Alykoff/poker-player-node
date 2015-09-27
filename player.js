@@ -157,7 +157,7 @@ module.exports = {
 
   exception: false,
   show_log:true,
-  VERSION: "Stage preflop, 2 strategy",
+  VERSION: "Stage flop",
 
   log: function () {
       if (this.show_log) {

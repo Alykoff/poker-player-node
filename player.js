@@ -24,22 +24,23 @@ function preflop_stage(game_state) {
       return false;
     }
 
-    var card1 = player.hole_cards[0], card2 = player.hole_cards[1];
+    var card1 = player.hole_cards[0], 
+        card2 = player.hole_cards[1],
+        numCard1 = rank2Num(card1.rank),
+        numCard2 = rank2Num(card1.rank);
 
-    if (
-      card1.rank == card2.rank
-    ) {
+    if (numCard1 === numCard2) {
       return 1000;
     }
 
     var bet = 0;
 
     min_raise = game_state.current_buy_in - player.bet + game_state.minimum_raise;
-    if ( rank2Num(card1.rank) >= 10 ) {
+    if ( numCard1 >= 10 ) {
       bet += min_raise > 500 ? min_raise : 500;
     }
 
-    if ( rank2Num(card2.rank) >= 10 ) {
+    if ( numCard2 >= 10 ) {
       bet += min_raise > 500 ? min_raise : 500;
     }
 

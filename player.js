@@ -73,11 +73,9 @@ function flop_request(game_state) {
   
   allCards.push(card2);
 
-  console.log('Stack in flop: ' + stack);
-
   for (var card in communityCards) {
-    allCards.push(card);
-    arPairs[rank2Num(card.rank)] += 1;
+    allCards.push(communityCards[card]);
+    arPairs[rank2Num(communityCards[card].rank)] += 1;
   }
     
   for (i in arPairs) {

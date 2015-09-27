@@ -75,11 +75,14 @@ function flop_request(game_state) {
   }
     
   for (i in arPairs) {
-    if(arPairs[i] == 4) {
+    if(
+      arPairs[i] == 4
+      && (i == rank1 || i == rank2)
+    ) {
       isFour = 1;
-    } else if(arPairs[i] == 3) {
+    } else if(arPairs[i] == 3 && (i == rank1 || i == rank2)) {
       isThree = 1;
-    } else if(arPairs[i] == 2) {
+    } else if(arPairs[i] == 2 && (i == rank1 || i == rank2)) {
       if( isPair >  0) {
         isTwoPair = 1;
       } else {

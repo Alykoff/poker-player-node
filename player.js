@@ -67,14 +67,9 @@ function flop_request(game_state) {
 
   for (var card in communityCards) {
     allCards.push(card);
-    arPairs[card.rank] += 1;
+    arPairs[rank2Num(card.rank)] += 1;
   }
-  
-  
-  for (i in allCards) {
-    arPairs[rank2(allCards[i].rank)] += 1;
-  }
-  
+    
   for (i in arPairs) {
     if(arPairs[i] == 4) {
       isFour = 1;

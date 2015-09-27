@@ -1,14 +1,9 @@
-
-module.exports = {
-
-  VERSION: "Preflop stage active",
-
   /**
    * @returns false - если не префлоп
    *      1000 - если пара или больше или равно 10
    *      0 - если нужно сбросить карты
    */
-  preflop_stage: function(game_state) {
+  function preflop_stage(game_state) {
     var player = game_state.players[game_state.in_action];
 
     if ( player.hole_cards.length != 2 ) {
@@ -42,20 +37,24 @@ module.exports = {
     }
     
     return 10;
-  },
+  }
 
-  flop_request: function(game_state) {
+  function flop_request(game_state) {
     return 1000;
-  },
+  }
   
-  turn_request: function(game_state) {
+  function turn_request(game_state) {
     return 1000;
-  },
+  }
   
-  river_request: function(game_state) {
+  function river_request(game_state) {
     return 1000;
-  },
-  
+  }
+
+
+module.exports = {
+
+  VERSION: "Preflop stage active",  
   
   bet_request: function(game_state) {
     console.log('game_state_json', JSON.stringify(game_state));

@@ -37,7 +37,7 @@ function preflop_stage(game_state) {
         }
       } else {
         if (rank1 + rank2 >= 17) {
-          bet = game_state.current_buy_in - game_state.players[game_state.in_action].bet;
+          bet = game_state.current_buy_in - player.bet;
         }
       }
     } else if ((rank1 + rank2 >= 17)) {
